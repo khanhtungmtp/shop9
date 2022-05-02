@@ -23,7 +23,9 @@ Route::middleware('auth')->group(function ()
         Route::prefix('menu')->group(function (){
             Route::get('/add',[MenuController::class, 'create']);
             Route::post('/add',[MenuController::class, 'store']);
-            Route::get('/list',[MenuController::class, 'list']);
+            Route::get('/edit/{menu}',[MenuController::class, 'show']);
+            Route::post('/edit/{menu}',[MenuController::class, 'update']);
+            Route::get('/list',[MenuController::class, 'list'])->name('listMenu');
             Route::delete('destroy',[MenuController::class,'destroy']);
         });
     });
