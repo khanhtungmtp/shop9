@@ -8,7 +8,7 @@
             <th>Tên</th>
             <th>Trạng thái</th>
             <th>Update</th>
-            <th>&nbsp;</th>
+            <th style="width: 100px">Chức năng</th>
         </tr>
         </thead>
         <tbody>

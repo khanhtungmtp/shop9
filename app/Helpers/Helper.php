@@ -18,6 +18,12 @@ class Helper
                     <td>'.$char.$menu->name.'</td>
                     <td>'.$menu->active.'</td>
                     <td>'.$menu->updated_at.'</td>
+                    <td>
+                       <a href="/admin/menu/edit/'.$menu->id.'" class="btn btn-primary btn-sm">
+                       <i class="fas fa-edit"></i></a>
+                       <a href="#" onclick="removeRow('.$menu->id.',\'/admin/menu/destroy\')" class="btn btn-danger btn-sm">
+                       <i class="fas fa-trash"></i></a>
+                    </td>
                 </tr>
                 ';
                 // mõi lần đệ quy  Xóa chuyên mục đã lặp cho nhẹ

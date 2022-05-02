@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function ()
             Route::get('/add',[MenuController::class, 'create']);
             Route::post('/add',[MenuController::class, 'store']);
             Route::get('/list',[MenuController::class, 'list']);
+            Route::delete('destroy',[MenuController::class,'destroy']);
         });
     });
 });

@@ -38,4 +38,15 @@ class MenuService
             $query->where('parent_id', $parent_id);
         })->get();
     }
+
+    public function destroy($request)
+    {
+        $id = (int) $request->input('id');
+        $result = Menu::where('id', $id)->first();
+        // tim danh muc con de xoa
+        if ($result){
+            return Menu::where('id', $id)->orWhere('parent_id', $id)->delete();
+        }
+        return false;
+    }
 }
