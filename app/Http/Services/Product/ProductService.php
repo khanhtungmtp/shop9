@@ -13,6 +13,12 @@ class ProductService
         return Menu::where('active', 1)->get();
     }
 
+    // lay san pham, menu la class
+    public function get():Object
+    {
+        return Product::with('menu')->orderByDesc('id')->paginate(15);
+    }
+
     public function store($request): bool
     {
         $isValidPriceSale = $this->isValidPriceSale($request);

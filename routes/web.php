@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function ()
         Route::prefix('product')->group(function (){
             Route::get('/add',[ProductController::class,'create']);
             Route::post('/add',[ProductController::class,'store']);
+            Route::get('/list',[ProductController::class,'index']);
         });
 
         // upload

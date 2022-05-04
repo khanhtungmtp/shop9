@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    protected $table = 'products';
     protected $fillable =[
         'name',
         'description',
@@ -18,4 +19,9 @@ class Product extends Model
         'thumb',
         'active',
     ];
+
+    public function menu()
+    {
+        return $this->hasOne(Menu::class,'id', 'menu_id');
+    }
 }
