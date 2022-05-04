@@ -73,4 +73,14 @@ class ProductService
         }
         return true;
     }
+
+    public function destroy($request):bool
+    {
+        $product = Product::where('id',$request->input('id'))->first();
+        if ($product){
+            $product->delete();
+            return true;
+        }
+        return false;
+    }
 }

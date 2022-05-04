@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\ProductRequest;
 use App\Http\Services\Product\ProductService;
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -36,7 +37,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.add', [
+        return view('admin.product.add', [
            'title' => 'Thêm mới sản phẩm',
             'menus' => $this->productService->getMenu()
         ]);
@@ -85,11 +86,20 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
      *
      */
-    public function destroy($id)
+    public function destroy(Request $request):JsonResponse
     {
-        //
+        $result = $this->productService->destroy($request);
+        if (!$result){
+            return response()->json([
+                'error' => true,
+                'message' => 'Xóa sản phẩm thất bại'
+            ]);
+        }
+        return response()->json([
+            'error' => false,
+            'message' => 'Xóa sản phẩm thành công'
+        ]);
     }
 }

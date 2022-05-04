@@ -17,7 +17,7 @@ function removeRow(id, url) {
                     alert(result.message);
                     location.reload();
                 } else {
-                    alert('Xóa danh mục thất bại');
+                    alert('Xóa thất bại');
                 }
             }
         })
