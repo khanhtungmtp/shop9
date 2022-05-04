@@ -19,9 +19,10 @@ class ProductService
         return Product::with('menu')->orderByDesc('id')->paginate(15);
     }
 
+    // insert
     public function store($request): bool
     {
-        $isValidPriceSale = $this->isValidPriceSale($request);
+        $isValidPriceSale = $this->isValidPrice($request);
         if ($isValidPriceSale === false)
             return false;
         try
@@ -38,8 +39,25 @@ class ProductService
         return true;
     }
 
+    public function update($request, $product):bool
+    {
+        $isValidPrice = $this->isValidPrice($request);
+        if ($isValidPrice === false) return false;
+        try
+        {
+            $product->fill($request->input());
+            $product->save();
+            Session::flash('success', 'Cập nhập sản phẩm thành công');
+        }catch (\Exception $err){
+            Session::flash('error', 'Cập nhập sản phẩm thất bại');
+            \Log::info($err->getMessage());
+            return false;
+        }
+        return true;
+    }
+
     // Tính hợp lệ giá sale
-    public function isValidPriceSale($request): bool
+    public function isValidPrice($request): bool
     {
         if ($request->input('price') != 0 && $request->input('price_sale') != 0
             && $request->input('price_sale') >= $request->input('price'))

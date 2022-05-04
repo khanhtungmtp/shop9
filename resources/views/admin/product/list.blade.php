@@ -22,7 +22,7 @@
                 <td>{{$product->menu->name}}</td>
                 <td>{{$product->price}}</td>
                 <td>{{$product->price_sale}}</td>
-                <td>{{$product->active}}</td>
+                <td>{!! \App\Helpers\Helper::Active($product->active) !!}</td>
                 <td>{{$product->updated_at}}</td>
                 <td>
                     <a href="/admin/product/edit/{{$product->id}}" class="btn btn-primary btn-sm">
