@@ -5,7 +5,7 @@ namespace App\Helpers;
 class Helper
 {
     // đệ quy
-    public static function Menu($menus, $parent_id = 0, $char = '')
+    public static function Menu($menus, $parent_id = 0, $char = ''):string
     {
         $html = '';
         foreach ($menus as $key => $menu)
@@ -35,7 +35,7 @@ class Helper
         return $html;
     }
 
-    public static function Active($active)
+    public static function Active($active):string
     {
         return $active == 0 ? '<span class="btn btn-danger btn-xs">Không</span>' : '<span class="btn btn-success btn-xs">Có</span>';
     }
