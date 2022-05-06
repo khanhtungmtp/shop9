@@ -13,7 +13,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Thứ tự</label>
-                        <input type="text" name="sort_by" class="form-control" id="sort_by" value="{{old('sort_by')}}">
+                        <input type="number" name="sort_by" class="form-control" id="sort_by" value="{{old('sort_by')}}">
                     </div>
                 </div>
             </div>

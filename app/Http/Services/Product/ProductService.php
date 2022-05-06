@@ -5,6 +5,7 @@ namespace App\Http\Services\Product;
 use App\Models\Menu;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class ProductService
 {
@@ -79,6 +80,8 @@ class ProductService
         $product = Product::where('id',$request->input('id'))->first();
         if ($product){
             $product->delete();
+            $path = str_replace('storage', 'public', $product->thumb);
+            Storage::delete($path);
             return true;
         }
         return false;
