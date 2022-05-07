@@ -7,11 +7,10 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Admin\User\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Client\MainClientController;
 
-Route::get('/', function ()
-{
-    return view('welcome');
-});
+// client
+Route::get('/', [MainClientController::class, 'index']);
 
 Route::get('admin/users/login', [LoginController::class, 'index'])->name('login');
 Route::post('admin/users/login/store', [LoginController::class, 'store']);
@@ -19,6 +18,7 @@ Route::post('admin/users/login/store', [LoginController::class, 'store']);
 // dang nhap moi vao duoc
 Route::middleware('auth')->group(function ()
 {
+    //admin
     Route::prefix('admin')->group(function ()
     {
         Route::get('/', [MainController::class, 'index'])->name('admin');
