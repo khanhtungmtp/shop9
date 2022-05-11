@@ -12,6 +12,7 @@ use App\Http\Controllers\Client\MainClientController;
 // client
 Route::get('/', [MainClientController::class, 'index']);
 
+
 Route::get('admin/users/login', [LoginController::class, 'index'])->name('login');
 Route::post('admin/users/login/store', [LoginController::class, 'store']);
 
