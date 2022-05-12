@@ -31,7 +31,7 @@ class MainClientController extends Controller
         $sliders  = $this->_sliderService->getSlide();
         $menus    = $this->_menuService->getMenu();
         $products = $this->_productService->getProduct();
-        return view('client.main', [
+        return view('client.home', [
             'title'    => 'Shop quần áo khanh tùng',
             'sliders'  => $sliders,
             'menus'    => $menus,
