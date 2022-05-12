@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $table = 'products';
-    protected $fillable =[
+
+    protected $table    = 'products';
+    protected $fillable = [
         'name',
         'description',
         'content',
@@ -22,6 +23,7 @@ class Product extends Model
 
     public function menu()
     {
-        return $this->hasOne(Menu::class,'id', 'menu_id');
+        return $this->hasOne(Menu::class, 'id', 'menu_id')
+            ->withDefault(['name' => '']);
     }
 }

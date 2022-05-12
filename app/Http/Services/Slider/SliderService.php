@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class SliderService
 {
+    //admin
     public function store($request):bool
     {
         try
@@ -54,5 +55,11 @@ class SliderService
             return true;
         }
         return false;
+    }
+
+    // client
+    public function getSlide()
+    {
+        return Slider::where('active', 1)->orderByDesc('sort_by')->get();
     }
 }

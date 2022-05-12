@@ -54,7 +54,7 @@ class MenuService
         return true;
     }
 
-    public function destroy($request)
+    public function destroy($request):bool
     {
         $id = (int) $request->input('id');
         $result = Menu::where('id', $id)->first();
@@ -63,5 +63,11 @@ class MenuService
             return Menu::where('id', $id)->orWhere('parent_id', $id)->delete();
         }
         return false;
+    }
+
+    // client
+    public function getMenu()
+    {
+        return Menu::where(['active' => 1, 'parent_id' => 0])->limit(3)->get();
     }
 }

@@ -99,3 +99,4 @@
 </script>
 <!--===============================================================================================-->
 <script src="template/client/js/main.js"></script>
+<script src="template/client/js/public.js"></script>

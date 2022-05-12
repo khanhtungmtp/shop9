@@ -9,15 +9,17 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductService
 {
+    const LIMIT = 4;
+
     public function getMenu()
     {
         return Menu::where('active', 1)->get();
     }
 
     // lay san pham, menu la class
-    public function get():Object
+    public function get(): object
     {
-        return Product::with('menu')->orderByDesc('id')->paginate(15);
+        return Product::with('menu')->orderByDesc('id')->paginate(5);
     }
 
     // insert
@@ -40,16 +42,18 @@ class ProductService
         return true;
     }
 
-    public function update($request, $product):bool
+    public function update($request, $product): bool
     {
         $isValidPrice = $this->isValidPrice($request);
-        if ($isValidPrice === false) return false;
+        if ($isValidPrice === false)
+            return false;
         try
         {
             $product->fill($request->input());
             $product->save();
             Session::flash('success', 'Cập nhập sản phẩm thành công');
-        }catch (\Exception $err){
+        } catch (\Exception $err)
+        {
             Session::flash('error', 'Cập nhập sản phẩm thất bại');
             \Log::info($err->getMessage());
             return false;
@@ -75,15 +79,27 @@ class ProductService
         return true;
     }
 
-    public function destroy($request):bool
+    public function destroy($request): bool
     {
-        $product = Product::where('id',$request->input('id'))->first();
-        if ($product){
+        $product = Product::where('id', $request->input('id'))->first();
+        if ($product)
+        {
             $product->delete();
             $path = str_replace('storage', 'public', $product->thumb);
             Storage::delete($path);
             return true;
         }
         return false;
+    }
+
+    // client
+    public function getProduct($page = null)
+    {
+        return Product::select('id', 'name', 'price', 'price_sale', 'thumb')
+            ->when($page != null, function ($query) use ($page)
+            {
+                $query->offset($page * self::LIMIT);
+            })
+            ->limit(self::LIMIT)->get();
     }
 }
