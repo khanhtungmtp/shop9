@@ -102,4 +102,16 @@ class ProductService
             })
             ->limit(self::LIMIT)->get();
     }
+
+    public function show($id)
+    {
+        return Product::where('id', $id)->with('menu')->firstOrFail();
+    }
+
+    public function more($id)
+    {
+        return Product::where('active', 1)->where('id', '!=', $id)
+            ->orderByDesc('id')
+            ->limit(10)->get();
+    }
 }

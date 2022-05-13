@@ -9,11 +9,13 @@ use App\Http\Controllers\Admin\User\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\MainClientController;
 use App\Http\Controllers\Client\MenuClientController;
+use App\Http\Controllers\Client\ProductClientController;
 
 // client
 Route::get('/', [MainClientController::class, 'index']);
 Route::post('/load/product', [MainClientController::class, 'loadMoreProduct']);
 Route::get('danh-muc/{id}/{slug}.html', [MenuClientController::class, 'index']);
+Route::get('san-pham/{id}/{slug}.html', [ProductClientController::class, 'index']);
 
 
 Route::get('admin/users/login', [LoginController::class, 'index'])->name('login');
