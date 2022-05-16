@@ -10,13 +10,18 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\MainClientController;
 use App\Http\Controllers\Client\MenuClientController;
 use App\Http\Controllers\Client\ProductClientController;
+use App\Http\Controllers\CartController;
 
 // client
 Route::get('/', [MainClientController::class, 'index']);
 Route::post('/load/product', [MainClientController::class, 'loadMoreProduct']);
 Route::get('danh-muc/{id}/{slug}.html', [MenuClientController::class, 'index']);
 Route::get('san-pham/{id}/{slug}.html', [ProductClientController::class, 'index']);
-
+Route::post('add-cart',[CartController::class, 'index']);
+Route::get('carts',[CartController::class, 'show']);
+Route::post('update-cart',[CartController::class, 'update']);
+Route::get('carts/delete/{id}',[CartController::class, 'remove']);
+Route::post('carts', [CartController::class, 'addCart']);
 
 Route::get('admin/users/login', [LoginController::class, 'index'])->name('login');
 Route::post('admin/users/login/store', [LoginController::class, 'store']);

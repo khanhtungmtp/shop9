@@ -2,6 +2,7 @@
 <header>
 @php
     $menuHtml = \app\Helpers\Helper::menuClient($menus);
+    $countCart = !is_null(\Session::get('carts')) ? count(\Session::get('carts')) : 0;
 @endphp
     <!-- Header desktop -->
     <div class="container-menu-desktop">
@@ -9,8 +10,8 @@
             <nav class="limiter-menu-desktop container">
 
                 <!-- Logo desktop -->
-                <a href="#" class="logo">
-                    <img src="/template/client/images/icons/logo-01.png" alt="IMG-LOGO">
+                <a href="/" class="logo">
+                    <img src="{{asset('template/client/images/logo/hieuhien-vn-logo-1.png')}}" alt="IMG-LOGO">
                 </a>
 
                 <!-- Menu desktop -->
@@ -33,7 +34,7 @@
                         <i class="zmdi zmdi-search"></i>
                     </div>
 
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{$countCart}}">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
                 </div>
