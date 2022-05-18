@@ -17,6 +17,7 @@
     <!-- Shoping Cart -->
     @if(count($products) != 0)
         <form class="bg0 p-t-75 p-b-85" method="post">
+            @include('client.alert')
             @csrf
             <div class="container">
                 <div class="row">
@@ -39,7 +40,6 @@
                                             $price = \App\Helpers\Helper::price($product->price, $product->price_sale);
                                             $priceEnd = $product->price_sale != 0 ? $product->price_sale : $product->price;
                                             $priceEnd = $priceEnd * $carts[$product->id];
-                                            print_r($priceEnd);
                                             $total = $total + $priceEnd;
                                         @endphp
                                         <tr class="table_row">
@@ -113,7 +113,7 @@
                                         </span>
 
                                         <div class="bor8 bg0 m-b-12">
-                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name" placeholder="Tên khách Hàng" required>
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text"  name="name" placeholder="Tên khách Hàng" required>
                                         </div>
 
                                         <div class="bor8 bg0 m-b-12">
@@ -129,7 +129,7 @@
                                         </div>
 
                                         <div class="bor8 bg0 m-b-12">
-                                            <textarea class="cl8 plh3 size-111 p-lr-15" name="note"></textarea>
+                                            <textarea class="cl8 plh3 size-111 p-lr-15" name="note" ></textarea>
                                         </div>
 
                                     </div>

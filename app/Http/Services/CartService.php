@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Jobs\sendMail;
 use App\Models\Cart;
 use App\Models\Customer;
 use App\Models\Product;
@@ -77,6 +78,7 @@ class CartService
             DB::commit();
             $this->getProduct($customer->id);
             Session::flash('success', 'Mua hàng thành công');
+            SendMail::dispatch($request->input('email'))->delay(now()->addSeconds(2));
             Session::forget('carts');
 
         }catch (\Exception $err){
@@ -105,6 +107,18 @@ class CartService
                 'qty' => $carts[$product->id],
             ];
         }
+
         return Cart::insert($data);
+    }
+
+    public function sendMail($email, $data)
+    {
+        $cart_info = Product::where('id', $data[0]['product_id'])->get();
+        $customer_info = Customer::where('id', $data[0]['customer_id'])->firstOrFail();
+        return [
+            'cart_info' => $cart_info,
+            'customer_info' => $customer_info,
+            'email' => $email,
+        ];
     }
 }
