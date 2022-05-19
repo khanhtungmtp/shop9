@@ -71,4 +71,6 @@
             {!! $products->links() !!}
         </div>
     </div>
+    @include('client.foot')
 @endsection
+

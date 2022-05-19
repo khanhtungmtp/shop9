@@ -19,9 +19,19 @@ class MenuClientController
     {
         $menu     = $this->_menuService->getID($id);
         $products = $this->_menuService->productOfMenu($menu, $request);
+        $menus = $this->_menuService->getMenu();
         return view('client.menu.menu', [
-            'title' => $menu->name,
-            'products' => $products
+            'title'    => $menu->name,
+            'products' => $products,
+            'menus' => $menus
+        ]);
+    }
+
+    public function footer()
+    {
+        $menu = $this->_menuService->getMenu();
+        return view('client.home', [
+            'menus' => $menu
         ]);
     }
 }
